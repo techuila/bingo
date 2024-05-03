@@ -1,0 +1,20 @@
+body {
+	background-color: #10212d;
+}
+
+.mainContainer {
+	display: flex;
+	margin: 0 auto;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: calc(100% - 32px);
+	max-width: 980px;
+}
+
+@media screen and (max-width: 768px) {
+	.mainContainer {
+		padding: 0 16px;
+	}
+}
