@@ -1,0 +1,21 @@
+.gridContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 100%;
+	height: 100vw;
+	max-width: 790px;
+	max-height: 822px;
+}
+
+.row {
+	display: flex;
+	gap: 10px;
+	flex: 100%;
+}
+
+@media screen and (max-width: 768px) {
+	.gridContainer {
+		height: calc(100vw - 32px);
+	}
+}
