@@ -1,0 +1,43 @@
+body {
+	color: #000000 !important;
+	background-color: #fcfcfc !important;
+}
+
+.title {
+	font-size: 3rem;
+}
+
+p {
+	font-size: 1.25rem;
+	line-height: 1.75rem;
+	color: rgb(107 114 128 / 1);
+}
+
+.container {
+	margin-top: calc(50vh - 200px);
+	display: flex;
+	justify-content: center;
+	gap: 4rem;
+}
+
+.container div {
+	max-width: 604px;
+}
+
+.actions {
+	display: flex;
+	gap: 16px;
+}
+
+@media screen and (max-width: 768px) {
+	.container {
+		flex-direction: column;
+		margin: 0;
+		padding: 0 0.75rem;
+		gap: 0;
+	}
+
+	h1 {
+		margin-bottom: 0;
+	}
+}
