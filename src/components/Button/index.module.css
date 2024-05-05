@@ -1,0 +1,22 @@
+.container {
+	height: 36px;
+	padding: 8px 16px;
+	border-radius: 6px;
+	border: none;
+	font-size: 14px;
+}
+
+.container:hover {
+	cursor: pointer;
+}
+
+.primary {
+	color: #ffffff;
+	background-color: rgb(17 24 39 / 0.9);
+}
+
+.secondary {
+	color: #000000;
+	background-color: #ffffff;
+	border: 1px solid rgb(17 24 39 / 0.9);
+}

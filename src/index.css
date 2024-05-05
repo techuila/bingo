@@ -1,0 +1,16 @@
+body {
+	background-color: #10212d;
+	font-family: 'Libre Franklin', sans-serif;
+	color: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p {
+	font-family: 'Libre Franklin', sans-serif;
+}

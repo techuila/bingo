@@ -1,13 +1,23 @@
-import { Grid } from './components/Grid';
+import { Home } from './pages/Home';
+import { Bingo } from './pages/Bingo';
+import {
+	createBrowserRouter,
+	createRoutesFromElements,
+	Route,
+	RouterProvider
+} from 'react-router-dom';
 
-import styles from './App.module.css';
+const router = createBrowserRouter(
+	createRoutesFromElements(
+		<>
+			<Route path='/' element={<Home />} />
+			<Route path='room/:roomId' element={<Bingo />} />
+		</>
+	)
+);
 
 function App() {
-	return (
-		<div className={styles.mainContainer}>
-			<Grid rows={5} columns={5} />
-		</div>
-	);
+	return <RouterProvider router={router} />;
 }
 
 export default App;
