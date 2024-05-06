@@ -1,27 +1,34 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/Button';
+import { headers } from '../../constants/headers';
 import supabase from '../../utils/supabase';
 
 import styles from './index.module.css';
 
 export function Home() {
+	const [isLoading, setIsLoading] = useState(false);
+	const navigate = useNavigate();
+
 	const handleCreateRoom = async () => {
 		try {
+			setIsLoading(true);
 			const {
 				data: { data },
 				error
 			} = await supabase.functions.invoke('room', {
-				headers: {
-					'x-api-key': import.meta.env.VITE_EDGE_FUNCTIONS_API_KEY,
-					'Content-Type': 'application/json'
-				},
+				headers,
 				method: 'POST'
 			});
 			if (error) throw error;
 
 			localStorage.setItem('roomId', data.room_id);
 			localStorage.setItem('creatorId', data.creator_id);
+			navigate(`/room/${data.room_id}`);
 		} catch (error) {
 			console.error(error);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -39,7 +46,11 @@ export function Home() {
 
 					<div className={styles.actions}>
 						<Button variant='primary'>Join Room</Button>
-						<Button variant='secondary' onClick={handleCreateRoom}>
+						<Button
+							variant='secondary'
+							onClick={handleCreateRoom}
+							isLoading={isLoading}
+						>
 							Create Room
 						</Button>
 					</div>
