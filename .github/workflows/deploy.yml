@@ -1,0 +1,37 @@
+name: Deployment
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    env:
+      PORT_PROD: 8082
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: |
+          cd client
+          npm install
+
+      - name: Build React App
+        run: |
+          cd client
+          npm run build
+
+  deploy:
+    runs-on: self-hosted
+    needs: [build]
+    env:
+      PROJECT_DIR: /var/www/bingo
+    steps:
+      - name: Copy files to /var/www/bingo
+        run: |
+          rm -rf $PROJECT_DIR/client/dist
+          rm -rf client/node_modules
+          cp -r ./ $PROJECT_DIR
