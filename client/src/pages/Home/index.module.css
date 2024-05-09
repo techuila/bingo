@@ -24,6 +24,34 @@ p {
 	gap: 16px;
 }
 
+.inputContainer {
+	display: flex;
+	border: 1px solid rgb(17 24 39 / 0.9);
+	border-radius: 8px;
+}
+
+.inputContainer input {
+	display: none;
+	border: none;
+	border-radius: 6px 0 0 6px;
+	padding: 6px 8px;
+	font-size: 1rem;
+}
+
+.inputContainer input:focus {
+	outline: none;
+}
+
+.inputContainer button {
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+
+.inputExpand {
+	border-top-left-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+}
+
 @media screen and (max-width: 768px) {
 	.container {
 		flex-direction: column;

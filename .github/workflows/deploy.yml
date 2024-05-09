@@ -9,20 +9,22 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    env:
-      PORT_PROD: 8082
     steps:
       - uses: actions/checkout@v2
 
       - name: Install Dependencies
         run: |
           cd client
-          npm install
+          pnpm install
 
       - name: Build React App
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_KEY }}
+          VITE_EDGE_FUNCTIONS_API_KEY: ${{ secrets.VITE_EDGE_FUNCTIONS_API_KEY }}
         run: |
           cd client
-          npm run build
+          pnpm run build
 
   deploy:
     runs-on: self-hosted

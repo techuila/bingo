@@ -1,35 +1,56 @@
-import { useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import cx from 'clsx';
+
 import { Button } from '../../components/Button';
-import { headers } from '../../constants/headers';
-import supabase from '../../utils/supabase';
 
 import styles from './index.module.css';
+import { motion } from 'framer-motion';
+import { useCreateRoom } from './hooks/useCreateRoom';
+
+const inputButtonVariant = {
+	hidden: {
+		display: 'none',
+		width: 0
+	},
+	visible: {
+		display: 'inline-block',
+		width: 100,
+		transition: {
+			duration: 0.25
+		}
+	}
+};
 
 export function Home() {
-	const [isLoading, setIsLoading] = useState(false);
+	const { createRoom, isLoading } = useCreateRoom();
+	const [joinClicked, setJoinClicked] = useState(false);
+	const [roomId, setRoomId] = useState('');
 	const navigate = useNavigate();
 
 	const handleCreateRoom = async () => {
-		try {
-			setIsLoading(true);
-			const {
-				data: { data },
-				error
-			} = await supabase.functions.invoke('room', {
-				headers,
-				method: 'POST'
-			});
-			if (error) throw error;
+		const { data } = await createRoom();
 
-			localStorage.setItem('roomId', data.room_id);
-			localStorage.setItem('creatorId', data.creator_id);
-			navigate(`/room/${data.room_id}`);
-		} catch (error) {
-			console.error(error);
-		} finally {
-			setIsLoading(false);
+		if (data) {
+			navigate(`room/${data.room_id}`);
 		}
+	};
+
+	const handleJoinRoom = () => {
+		if (!joinClicked) {
+			setJoinClicked(true);
+			return;
+		}
+
+		navigate(`room/${roomId}`);
+	};
+
+	const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+		setRoomId(event.target.value);
+	};
+
+	const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+		event.key === 'Enter' && handleJoinRoom();
 	};
 
 	return (
@@ -45,7 +66,23 @@ export function Home() {
 					</p>
 
 					<div className={styles.actions}>
-						<Button variant='primary'>Join Room</Button>
+						<div className={styles.inputContainer}>
+							<motion.input
+								type='text'
+								maxLength={5}
+								variants={inputButtonVariant}
+								animate={joinClicked ? 'visible' : 'hidden'}
+								onChange={handleInput}
+								onKeyDown={handleKeyDown}
+							/>
+							<Button
+								variant='primary'
+								onClick={handleJoinRoom}
+								className={cx(joinClicked && styles.inputExpand)}
+							>
+								Join Room
+							</Button>
+						</div>
 						<Button
 							variant='secondary'
 							onClick={handleCreateRoom}
