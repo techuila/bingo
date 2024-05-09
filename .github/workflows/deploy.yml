@@ -88,4 +88,4 @@ jobs:
         run: |
           rm -rf $PROJECT_DIR/client/dist
           rm -rf client/node_modules
-          cp -r ./ $PROJECT_DIR
+          cp -r ./client/dist $PROJECT_DIR/client/dist
