@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import supabase from './utils/supabase';
 import { headers } from './constants/headers';
+import { ToastProvider } from './components/Toast';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const initRoom = async ({ params }: any) => {
@@ -33,7 +34,11 @@ const router = createBrowserRouter(
 );
 
 function App() {
-	return <RouterProvider router={router} />;
+	return (
+		<ToastProvider>
+			<RouterProvider router={router} />
+		</ToastProvider>
+	);
 }
 
 export default App;
