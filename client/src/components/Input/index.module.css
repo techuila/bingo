@@ -1,0 +1,23 @@
+.container {
+	width: fit-content;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #2f4552;
+	border-radius: 6px;
+	padding: 0 8px;
+}
+
+.input {
+	padding: 8px 6px;
+	font-size: 2rem;
+	border-radius: 6px;
+	background-color: transparent;
+	border: none;
+	text-align: center;
+	max-width: 250px;
+}
+
+.input:disabled {
+	color: #efefefbf;
+}
