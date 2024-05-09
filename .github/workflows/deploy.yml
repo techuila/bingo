@@ -42,6 +42,10 @@ jobs:
           cd client
           pnpm install
 
+      - name: Run Lint
+        run: |
+          pnpm run lint
+
   build:
     runs-on: self-hosted
     needs: [lint]
