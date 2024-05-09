@@ -21,7 +21,7 @@ const initRoom = async ({ params }: any) => {
 	);
 	if (error) console.error(error);
 
-	return data;
+	return data.data;
 };
 
 const router = createBrowserRouter(

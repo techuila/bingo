@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams, useLoaderData } from 'react-router-dom';
 import { CopyOutlined } from '@ant-design/icons';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
@@ -10,10 +11,13 @@ import { Toast } from '../../components/Toast';
 import { useToast } from '../../components/Toast/hooks/useToast';
 import { useCopyToClipboard } from './hooks/useCopyToClipboard';
 
+import { Game } from './types/games';
+
 import styles from './index.module.css';
 
 export function Bingo() {
 	const { roomId } = useParams();
+	const game = useLoaderData() as Game;
 	const { value, onCopy } = useCopyToClipboard(
 		`${window.location.origin}/${roomId}`
 	);
@@ -23,6 +27,8 @@ export function Bingo() {
 		onCopy();
 		toastContext.show();
 	};
+
+	console.log(game);
 
 	return (
 		<div className={styles.container}>
