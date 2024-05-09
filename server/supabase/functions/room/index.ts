@@ -24,8 +24,19 @@ async function getRoom(supabaseClient: SupabaseClient, id: string) {
 		.select('id')
 		.eq('room_id', id)
 		.eq('is_active', true);
+	const { data: game, error: errorGame } = await supabaseClient
+		.from('games')
+		.select()
+		.eq('room_id', id);
+
 	if (error) {
 		return new Response(JSON.stringify({ error: error.message }), {
+			headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+			status: 500
+		});
+	}
+	if (errorGame) {
+		return new Response(JSON.stringify({ error: errorGame.message }), {
 			headers: { ...corsHeaders, 'Content-Type': 'application/json' },
 			status: 500
 		});
@@ -38,7 +49,7 @@ async function getRoom(supabaseClient: SupabaseClient, id: string) {
 		});
 	}
 
-	return new Response(JSON.stringify({ _: true }), {
+	return new Response(JSON.stringify({ data: game }), {
 		headers: { ...corsHeaders, 'Content-Type': 'application/json' },
 		status: 200
 	});
@@ -67,11 +78,26 @@ async function createRoom(supabaseClient: SupabaseClient) {
 		.from('rooms')
 		.insert([{ room_id }])
 		.select();
-	if (error)
+
+	const { error: errorGame } = await supabaseClient.from('games').insert([
+		{
+			room_id,
+			called_digits: []
+		}
+	]);
+	if (error) {
 		return new Response(JSON.stringify({ error: error.message }), {
 			headers: { ...corsHeaders, 'Content-Type': 'application/json' },
 			status: 500
 		});
+	}
+
+	if (errorGame) {
+		return new Response(JSON.stringify({ error: errorGame.message }), {
+			headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+			status: 500
+		});
+	}
 
 	return new Response(JSON.stringify({ data: data[0] }), {
 		headers: { ...corsHeaders, 'Content-Type': 'application/json' },
