@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Pattern } from '../types/pattern';
+import supabase from '../../../utils/supabase';
 
 const initialPatternState = new Array(25).fill(false) as Pattern;
 export function usePatternUpdate() {
-	const [pattern, setPattern] = useState<Pattern>(initialPatternState);
+	const [pattern, _] = useState<Pattern>(initialPatternState);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const updatePattern = async (pattern: Pattern) => {

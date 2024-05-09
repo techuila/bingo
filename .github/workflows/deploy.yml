@@ -7,10 +7,11 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  lint:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Install Node.js
         uses: actions/setup-node@v4
@@ -41,6 +42,9 @@ jobs:
           cd client
           pnpm install
 
+  build:
+    runs-on: self-hosted
+    steps:
       - name: Build React App
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
