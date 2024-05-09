@@ -14,7 +14,9 @@ import styles from './index.module.css';
 
 export function Bingo() {
 	const { roomId } = useParams();
-	const { value, onCopy } = useCopyToClipboard(roomId);
+	const { value, onCopy } = useCopyToClipboard(
+		`${window.location.origin}/${roomId}`
+	);
 	const toastContext = useToast();
 
 	const handleOnCopy = () => {
