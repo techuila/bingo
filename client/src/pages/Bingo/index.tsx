@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useParams, useLoaderData } from 'react-router-dom';
 import { CopyOutlined } from '@ant-design/icons';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
