@@ -61,8 +61,8 @@ export function Home() {
 				</div>
 				<div>
 					<p>
-						Play bingo with your friends or family. Create a room and share the
-						link with your friends or join a room with a link.
+						Play bingo with your friends. Create a room and share the link with
+						your friends or join a room with a link.
 					</p>
 
 					<div className={styles.actions}>
