@@ -16,7 +16,7 @@ import styles from './index.module.css';
 
 export function Bingo() {
 	// const { roomId } = useParams();
-	const game = useLoaderData() as Game;
+	// const game = useLoaderData() as Game;
 	const { value, onCopy } = useCopyToClipboard(
 		// `${window.location.origin}/${roomId}`
 		value
@@ -28,7 +28,7 @@ export function Bingo() {
 		toastContext.show();
 	};
 
-	console.log(game);
+	// console.log(game);
 
 	return (
 		<div className={styles.container}>
