@@ -27,8 +27,8 @@ const initRoom = async ({ params }: any) => {
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<>
-			<Route path='/' element={<Home />} />
-			<Route path='room/:roomId' element={<Bingo />} loader={initRoom} />
+			<Route path='/' element={<Bingo />} />
+{/* 			<Route path='room/:roomId' element={<Bingo />} loader={initRoom} /> */}
 		</>
 	)
 );
