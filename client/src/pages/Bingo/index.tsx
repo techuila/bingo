@@ -15,10 +15,11 @@ import { Game } from './types/games';
 import styles from './index.module.css';
 
 export function Bingo() {
-	const { roomId } = useParams();
+	// const { roomId } = useParams();
 	const game = useLoaderData() as Game;
 	const { value, onCopy } = useCopyToClipboard(
-		`${window.location.origin}/${roomId}`
+		// `${window.location.origin}/${roomId}`
+		value
 	);
 	const toastContext = useToast();
 
@@ -33,7 +34,7 @@ export function Bingo() {
 		<div className={styles.container}>
 			<div className={styles.mainContainer}>
 				<Input
-					value={roomId}
+					value={'test'}
 					containerClassName={styles.roomIdInput}
 					addOnAfter={
 						<CopyToClipboard text={value} onCopy={handleOnCopy}>
